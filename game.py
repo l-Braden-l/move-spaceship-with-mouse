@@ -22,10 +22,31 @@ def handle_events ():
 def main():
    screen = init_game()
    clock = pygame.time.Clock() # Initialize the clock here
+
+   # -- Set Position Of Graphic -- #
+   background_position = [0,0]
+
+   # -- Load and Set Up Graphic -- #
+   background_image = pygame.image.load("C:\move-spaceship-images\saturn_family1.jpg").convert()
+   player_image = pygame.image.load("C:\move-spaceship-images\player.png").convert()
+   player_image.set_colorkey(config.BLACK)
+
    running = True
    while running:
       running = handle_events()
       screen.fill(config.WHITE) # Use color from config
+
+      # -- Copy Image -- # 
+      screen.blit(background_image, background_position)
+
+      # -- get Current Mouse "Pos", this returens the "pos" as a list of two numbers -- #
+      player_position = pygame.mouse.get_pos() 
+      x = player_position[0] 
+      y = player_position[1]
+
+      # -- Copy Image to Screen -- # 
+      screen.blit(player_image, [x-50, y-50])
+
       pygame.display.flip()
 
       # -- Limit the frame rate to the specified frames per second (FPS) -- #
